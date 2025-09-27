@@ -1,0 +1,203 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Годинник і Калькулятор</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .calc {
+      width: 200px;
+      margin-top: 30px;
+    }
+    .calc input[type="text"] {
+      width: 100%;
+      height: 40px;
+      text-align: right;
+      margin-bottom: 10px;
+      font-size: 18px;
+      padding-right: 5px;
+    }
+    .calc button {
+      width: 45px;
+      height: 40px;
+      margin: 2px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body onLoad="clock()">
+
+  <!-- Завдання 1 -->
+  <h2>Завдання 1. Годинник</h2>
+  <form name="clock">
+    Дата і час:<br>
+    <input type="text" name="datetime" size="25" value="">
+  </form>
+
+  <!-- Завдання 2 -->
+  <h2>Завдання 2. Калькулятор</h2>
+  <div class="calc">
+    <input type="text" id="result" readonly>
+    <br>
+    <button onclick="addChar('7')">7</button>
+    <button onclick="addChar('8')">8</button>
+    <button onclick="addChar('9')">9</button>
+    <button onclick="addChar('/')">/</button>
+    <br>
+    <button onclick="addChar('4')">4</button>
+    <button onclick="addChar('5')">5</button>
+    <button onclick="addChar('6')">6</button>
+    <button onclick="addChar('*')">*</button>
+    <br>
+    <button onclick="addChar('1')">1</button>
+    <button onclick="addChar('2')">2</button>
+    <button onclick="addChar('3')">3</button>
+    <button onclick="addChar('-')">-</button>
+    <br>
+    <button onclick="addChar('0')">0</button>
+    <button onclick="addChar('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="addChar('+')">+</button>
+    <br>
+    <button onclick="clearResult()" style="width: 190px;">C</button>
+  </div>
+
+  <!-- Завдання 3 -->
+  <h2>Завдання 3. Матриця</h2>
+  <form id="main_form">
+  <table>
+  <tr>
+    <td>Кількість рядків</td>
+    <td><input type="text" id="t_str" value="5"></td>
+  </tr>
+  <tr>
+    <td>Кількість стовпців</td>
+    <td><input type="text" id="t_stb" value="5"></td>
+  </tr>
+  <tr>
+    <td><input type="button" onClick="fun();" value="Побудувати матрицю"></td>
+  </tr>
+  <tr>
+    <td><input type="button" onClick="fun_build();" value="Розрахувати"></td>
+  </tr>
+  </table>
+  <div id="main_div"></div>
+  </form>
+
+  <!-- Завдання 4 -->
+  <h2>Завдання 4. Дослідження console.log()</h2>
+  <button onclick="task4()">Виконати приклади console.log()</button>
+
+  <!-- Завдання 5 -->
+  <h2>Завдання 5. Інші методи console</h2>
+  <button onclick="task5()">Виконати приклади console.*()</button>
+
+  <script>
+    // --- Завдання 1. Годинник ---
+    function clock() {
+      let now = new Date();
+      let year = now.getFullYear();
+      let month = now.getMonth() + 1;
+      let day = now.getDate();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
+
+      let datetimeStr = year + "-"
+        + (month < 10 ? "0" : "") + month + "-"
+        + (day < 10 ? "0" : "") + day + "-"
+        + (hours < 10 ? "0" : "") + hours + "-"
+        + (minutes < 10 ? "0" : "") + minutes + "-"
+        + (seconds < 10 ? "0" : "") + seconds;
+
+      document.clock.datetime.value = datetimeStr;
+      setTimeout(clock, 1000);
+    }
+
+    // --- Завдання 2. Калькулятор ---
+    function addChar(char) {
+      document.getElementById("result").value += char;
+    }
+    function clearResult() {
+      document.getElementById("result").value = "";
+    }
+    function calculate() {
+      try {
+        document.getElementById("result").value = eval(document.getElementById("result").value);
+      } catch (e) {
+        document.getElementById("result").value = "Error";
+      }
+    }
+
+    // --- Завдання 3. Матриця ---
+    let str, stb;
+    function fun() {
+      str = parseInt(main_form.t_str.value);
+      stb = parseInt(main_form.t_stb.value);
+      let res_str = "<table border='1' cellspacing='0' cellpadding='5'>\n";
+      for(let i=1; i<=str; i++) {
+        res_str += "<tr>\n";
+        for(let j=1; j<=stb; j++) {
+          let val = (2 * j) / (5 * i);  // Aij = 2j / 5i
+          res_str += "<td>";
+          res_str += "<input type='text' id='_" + i + "_" + j + "' value='" + val.toFixed(2) + "'>";
+          res_str += "</td>\n";
+        }
+        res_str += "</tr>\n";
+      }
+      res_str += "</table>";
+      main_div.innerHTML = res_str;
+    }
+    function fun_build() {
+      let product = 1;
+      for(let i=1; i<=str; i++) {
+        let val = parseFloat(document.getElementById("_" + i + "_" + stb).value);
+        product *= val;
+      }
+      alert("Добуток елементів останнього стовпця = " + product.toFixed(4));
+    }
+
+    // --- Завдання 4 ---
+    function task4() {
+      let a = 17, b = 5;
+
+      // 1. Вивід остачі від ділення
+      console.log("Остача від ділення %d на %d = %d", a, b, a % b);
+
+      // 2. Логічне значення (true/false)
+      console.log("Чи ділиться %d на %d без остачі? %s", a, b, (a % b === 0));
+
+      // 3. Комбінований вивід масиву
+      let arr = [10, 20, 30];
+      console.log("Масив: %d, %d, %d", arr[0], arr[1], arr[2]);
+      console.log("Перший елемент як рядок: %s", arr[0]);
+    }
+
+    // --- Завдання 5 ---
+    function task5() {
+      console.info("Це інформаційне повідомлення (console.info).");
+      console.warn("Увага! Це попередження (console.warn).");
+      console.error("Сталася помилка (console.error).");
+
+      let obj = {name: "Іван", age: 20, skills: ["JS", "HTML", "CSS"]};
+      console.dir(obj);       // дерево об'єкта
+      console.dirxml(document.body); // XML-подання DOM
+
+      console.time("Тест часу");
+      for (let i=0; i<1e6; i++) {} // цикл для навантаження
+      console.timeEnd("Тест часу");
+
+      console.profile("Мій профіль");
+      for (let i=0; i<1000; i++) {
+        Math.sqrt(i);
+      }
+      console.profileEnd("Мій профіль");
+
+      console.assert(2+2===5, "Помилка: 2+2 не дорівнює 5!");
+    }
+  </script>
+</body>
+</html>
