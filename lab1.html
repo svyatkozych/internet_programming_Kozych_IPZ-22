@@ -1,0 +1,212 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна робота</title>
+<script>
+function showMsg1(msg) {
+  document.getElementById("t_res1").value = msg;
+}
+
+function showMsg2(msg) {
+  document.getElementById("t_res2").value = msg;
+}
+
+function calculation() {
+  let x = 12;
+  let y = 5;
+  let z = 9;
+  let F = x + Math.pow(y, 2) + Math.sqrt(z);
+  alert("Результат: F = " + F);
+}
+
+
+function fun4() {
+  let x = parseFloat(main_form4.t_x.value);
+  let y = parseFloat(main_form4.t_y.value);
+  let F;
+  if (x - 3 * y != 2) F = x - 2 * Math.pow(y, 2);
+  else if (x > 0) F = x - y / y;
+  else F = 2 * Math.pow(x, 2) - 3 * y;
+  main_form4.t_F.value = F;
+}
+
+
+function fun5() {
+  let x = parseFloat(main_form5.t_x.value);
+  let y = parseFloat(main_form5.t_y.value);
+  let sum = 0;
+  for (let i = 2; i <= 4; i++) {
+    let factorial = 1;
+    for (let j = 1; j <= i; j++) factorial *= j;
+    let term = Math.pow(-1, i + 1) * ((-x + x * Math.pow(y, 2)) / (2 * x * factorial));
+    sum += term;
+  }
+  main_form5.t_sum.value = sum;
+}
+
+
+let product = ["Сік", "Сир", "Сметана", "Сіль"];
+let quantity = [25, 40, 30, 100];
+let cost = [45.5, 120, 65, 25];
+let index = -1;
+
+
+function fun6_1() {
+  let name = document.form6.name_prod.value.trim();
+  index = product.indexOf(name);
+  if (index !== -1) {
+    document.form6.output_quantity.value = quantity[index];
+    document.form6.output_cost.value = cost[index] + " грн";
+  } else {
+    document.form6.output_quantity.value = "Товар не знайдено";
+    document.form6.output_cost.value = "";
+  }
+}
+
+function fun6_2() {
+  if (index === -1) {
+    document.getElementById("result6").innerHTML = "Спочатку оберіть товар!";
+    return;
+  }
+  let total = quantity[index] * cost[index];
+  document.getElementById("result6").innerHTML =
+    "Загальна сума товару \"" + product[index] + "\" = " + total.toFixed(2) + " грн";
+}
+
+
+function fun7_1() {
+  let name = document.form7.product_select.value;
+  index = product.indexOf(name);
+  if (index !== -1) {
+    document.form7.output_quantity.value = quantity[index];
+    document.form7.output_cost.value = cost[index] + " грн";
+  }
+}
+
+function fun7_2() {
+  if (index === -1) {
+    document.getElementById("result7").innerHTML = "Спочатку оберіть товар!";
+    return;
+  }
+  let total = quantity[index] * cost[index];
+  document.getElementById("result7").innerHTML =
+    "Загальна сума товару \"" + product[index] + "\" = " + total.toFixed(2) + " грн";
+}
+</script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  background: #f9f9f9;
+  color: #222;
+}
+h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 4px;
+}
+form {
+  margin-bottom: 25px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+input[type="text"], select {
+  padding: 5px;
+  margin: 4px 0;
+}
+input[type="button"] {
+  margin-top: 10px;
+  padding: 5px 15px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+input[type="button"]:hover {
+  background-color: #2980b9;
+}
+p#result6, p#result7 {
+  font-weight: bold;
+  color: #2c3e50;
+}
+</style>
+</head>
+
+<body onLoad="showMsg1('Сторінка завантажена')">
+
+<h2>Завдання 1</h2>
+<p>Це звичайний HTML абзац.</p>
+<script>
+document.write("Привіт! Мене звати Святослав, студент групи ІПЗ-22.");
+</script>
+<p>Знову звичайний HTML абзац.</p>
+<form>
+  <input type="button" value="Click me"
+    onClick="alert('Я народився 7.05.2007 року в місті Івано-Франківськ ')">
+</form>
+
+<h2>Завдання 2</h2>
+<form>
+  <input type="button" value="Calculate" onClick="calculation()">
+</form>
+
+<h2>Завдання 3</h2>
+<form id="main_form">
+  <input type="text" size="60" placeholder="Наведіть фокус сюди"
+    onFocus="showMsg1('Перше поле отримало фокус')"><br><br>
+  <input type="text" size="60" placeholder="Змініть текст тут"
+    onChange="showMsg1('Вміст другого поля змінено')"><br><br>
+  <p><b>Результати виконання:</b></p>
+  <input type="text" size="60" id="t_res1" placeholder="Повідомлення з onFocus / onChange"><br><br>
+  <input type="text" size="60" id="t_res2" placeholder="Додаткове повідомлення">
+</form>
+
+<h2>Завдання 4</h2>
+<form id="main_form4">
+  x <input type="text" id="t_x" value="2"><br>
+  y <input type="text" id="t_y" value="3"><br>
+  F <input type="text" id="t_F" value=""><br>
+  <input type="button" onClick="fun4();" value="Розрахувати">
+</form>
+
+<h2>Завдання 5</h2>
+<form id="main_form5">
+  x=<input type="text" id="t_x" value="2"><br>
+  y=<input type="text" id="t_y" value="3"><br>
+  Результат:<input type="text" id="t_sum" value=""><br>
+  <input type="button" onClick="fun5();" value="Обчислити суму ряду">
+</form>
+
+<h2>Завдання 6</h2>
+<form name="form6">
+  Введіть назву товару:<br>
+  <input type="text" name="name_prod" size="40"><br><br>
+  <input type="button" value="Наявна кількість і вартість" onClick="fun6_1()">
+  <input type="button" value="Загальна сума" onClick="fun6_2()"><br><br>
+  Кількість на складі: <input type="text" size="40" name="output_quantity"><br><br>
+  Вартість за одиницю: <input type="text" size="40" name="output_cost"><br><br>
+</form>
+<p id="result6"></p>
+
+<h2>Завдання 7</h2>
+<form name="form7">
+  Оберіть товар:<br>
+  <select name="product_select">
+    <option>Сік</option>
+    <option>Сир</option>
+    <option>Сметана</option>
+    <option>Сіль</option>
+  </select><br><br>
+  <input type="button" value="Наявна кількість і вартість" onClick="fun7_1()">
+  <input type="button" value="Загальна сума" onClick="fun7_2()"><br><br>
+  Кількість на складі: <input type="text" size="40" name="output_quantity"><br><br>
+  Вартість за одиницю: <input type="text" size="40" name="output_cost"><br><br>
+</form>
+<p id="result7"></p>
+
+</body>
+</html>
