@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>DOM і JSON</title>
+<style>
+body{font-family:Arial;margin:20px}
+button{margin:2px}
+section{display:none}
+.active{display:block}
+</style>
+<script>
+function showTab(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+function calcArea(){
+let a=document.getElementById("a").value;
+let b=document.getElementById("b").value;
+if(a&&b)document.getElementById("area").value=a*b;
+}
+let letters=['1','2','3','4','5','6','7','8','9','0','а','б','в','г','д','е','є','ж','з','и','і','ї','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ю','я'];
+function createKeyboard(){
+let html="";
+letters.map((ch,i)=>{if(i===10||i===20||i===30)html+="<br>";html+=`<button onclick="addSymbol('${ch}')">${ch}</button>`;});
+document.getElementById("keyboard").innerHTML=html;
+}
+function addSymbol(ch){document.getElementById("display").value+=ch;}
+function clearField(){document.getElementById("display").value="";}
+let lang="ua";
+let ua=['1','2','3','4','5','6','7','8','9','0','а','б','в','г','д','е','є','ж','з','и','і','ї','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ь','ю','я'];
+let en=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+function createKeyboard2(){
+let keys=lang==="ua"?ua:en;let html="";
+keys.map((ch,i)=>{if(i===10||i===20||i===30)html+="<br>";html+=`<button onclick="addSymbol2('${ch}')">${ch}</button>`;});
+document.getElementById("keyboard2").innerHTML=html;
+}
+function addSymbol2(ch){document.getElementById("display2").value+=ch;}
+function clearField2(){document.getElementById("display2").value="";}
+function toggleLang(){lang=(lang==="ua")?"en":"ua";createKeyboard2();}
+let images=['1.jpg','2.jpg','3.jpg','4.jpg'];let i=0;
+function showImage(){document.getElementById("img").src=images[i];}
+function nextImg(){i=(i+1)%images.length;showImage();}
+function prevImg(){i=(i-1+images.length)%images.length;showImage();}
+let score=0,total=0,a,b,op,answer;
+function newTask(){
+const ops=['+','-','*','/'];
+a=Math.floor(Math.random()*10);
+b=Math.floor(Math.random()*10)||1;
+op=ops[Math.floor(Math.random()*4)];
+document.getElementById("task").innerHTML=`${a} ${op} ${b} = `;
+document.getElementById("res").innerHTML="";
+document.getElementById("ans").value="";
+}
+function check(){
+total++;
+switch(op){case '+':answer=a+b;break;case '-':answer=a-b;break;case '*':answer=a*b;break;case '/':answer=+(a/b).toFixed(2);break;}
+let user=parseFloat(document.getElementById("ans").value);
+if(user==answer){score++;document.getElementById("res").innerHTML="Правильно ✅";}
+else{document.getElementById("res").innerHTML=`Помилка ❌ Правильна: ${answer}`;}
+document.getElementById("score").innerHTML=`Рахунок: ${(score/total*100).toFixed(0)}% (${score} з ${total})`;
+}
+let data={"fruits":["apple","pineapple","apricot","pear","lemon"],"vegetables":["potatoes","beetroot","carrots","pear"]};
+function toggle(id){let el=document.getElementById(id);el.style.display=(el.style.display==="none")?"block":"none";}
+function buildTree(){
+let html="";
+for(let key in data){
+html+=`<a href='javascript:toggle("${key}")'>${key}</a><ul id='${key}' style='display:none'>`;
+data[key].forEach(item=>html+=`<li>${item}</li>`);
+html+="</ul>";
+}
+document.getElementById("tree").innerHTML=html;
+}
+</script>
+</head>
+<body onload="createKeyboard();createKeyboard2();showImage();newTask();buildTree()">
+<h2>Лабораторна робота: DOM і JSON</h2>
+<button onclick="showTab('t1')">Завдання 1</button>
+<button onclick="showTab('t2')">Завдання 2</button>
+<button onclick="showTab('t3')">Завдання 3</button>
+<button onclick="showTab('t4')">Завдання 4</button>
+<button onclick="showTab('t5')">Завдання 5</button>
+<button onclick="showTab('t6')">Завдання 6</button>
+
+<section id="t1" class="active">
+<h3>Розрахунок площі прямокутника</h3>
+Довжина: <input id="a" type="number" onkeyup="calcArea()"><br><br>
+Ширина: <input id="b" type="number" onkeyup="calcArea()"><br><br>
+Площа: <input id="area" type="text" readonly>
+</section>
+
+<section id="t2">
+<h3>Екранна клавіатура (українська)</h3>
+<textarea id="display" cols="40" rows="4"></textarea><br><br>
+<div id="keyboard"></div><br>
+<button onclick="clearField()">Очистити поле</button>
+</section>
+
+<section id="t3">
+<h3>Клавіатура UA / EN</h3>
+<textarea id="display2" cols="40" rows="4"></textarea><br><br>
+<div id="keyboard2"></div><br>
+<button onclick="clearField2()">Очистити</button>
+<button onclick="toggleLang()">Alt+Shift</button>
+</section>
+
+<section id="t4">
+<h3>Перегляд зображень</h3>
+<img id="img" width="400"><br><br>
+<button onclick="prevImg()">Назад</button>
+<button onclick="nextImg()">Вперед</button>
+</section>
+
+<section id="t5">
+<h3>Арифметичний тест</h3>
+<div id="task"></div>
+<input type="text" id="ans">
+<button onclick="check()">Перевірити</button>
+<button onclick="newTask()">Наступне</button>
+<p id="res"></p>
+<p id="score"></p>
+</section>
+
+<section id="t6">
+<h3>Ієрархічне дерево</h3>
+<div id="tree"></div>
+</section>
+</body>
+</html>
