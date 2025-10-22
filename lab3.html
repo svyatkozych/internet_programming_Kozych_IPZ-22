@@ -38,7 +38,7 @@ document.getElementById("keyboard2").innerHTML=html;
 function addSymbol2(ch){document.getElementById("display2").value+=ch;}
 function clearField2(){document.getElementById("display2").value="";}
 function toggleLang(){lang=(lang==="ua")?"en":"ua";createKeyboard2();}
-let images=['1.jpg','2.jpg','3.jpg','4.jpg'];let i=0;
+let images=['img/630_360_1608725962-826.jpg','img/MainBefore.jpg','img/images.jpg','img/w-325-1.jpg'];let i=0;
 function showImage(){document.getElementById("img").src=images[i];}
 function nextImg(){i=(i+1)%images.length;showImage();}
 function prevImg(){i=(i-1+images.length)%images.length;showImage();}
@@ -56,8 +56,8 @@ function check(){
 total++;
 switch(op){case '+':answer=a+b;break;case '-':answer=a-b;break;case '*':answer=a*b;break;case '/':answer=+(a/b).toFixed(2);break;}
 let user=parseFloat(document.getElementById("ans").value);
-if(user==answer){score++;document.getElementById("res").innerHTML="Правильно ✅";}
-else{document.getElementById("res").innerHTML=`Помилка ❌ Правильна: ${answer}`;}
+if(user==answer){score++;document.getElementById("res").innerHTML="Правильно";}
+else{document.getElementById("res").innerHTML=`Помилка. Правильна: ${answer}`;}
 document.getElementById("score").innerHTML=`Рахунок: ${(score/total*100).toFixed(0)}% (${score} з ${total})`;
 }
 let data={"fruits":["apple","pineapple","apricot","pear","lemon"],"vegetables":["potatoes","beetroot","carrots","pear"]};
@@ -127,3 +127,4 @@ document.getElementById("tree").innerHTML=html;
 </section>
 </body>
 </html>
+
