@@ -99,55 +99,63 @@ function checkTest() {
   let total = 0;
   let results = [];
 
-  const q1 = form.q1.value;
-  results.push(["Яка мова використовується для керування поведінкою сторінки?", q1==1?"JavaScript":"-", q1==1?1:0]);
-  total += q1==1?1:0;
 
-  const q2 = form.q2.value;
-  results.push(["Який тег використовується для вставки JavaScript?", q2==1?"<script>":"-", q2==1?1:0]);
-  total += q2==1?1:0;
+  const q1 = form.q1.value || "";
+  const q1Score = q1=="1"?1:0;
+  results.push(["Яка мова використовується для керування поведінкою сторінки?", q1=="1"?"JavaScript":"-", q1Score]);
+  total += q1Score;
+
+
+  const q2 = form.q2.value || "";
+  const q2Score = q2=="1"?1:0;
+  results.push(["Який тег використовується для вставки JavaScript?", q2=="1"?"<script>":"-", q2Score]);
+  total += q2Score;
+
 
   const q3 = Array.from(form.q3).filter(el=>el.checked);
   const q3Vals = q3.map(e=>e.value);
   let q3Score = 0;
   if (q3.length==2) {
     let correct = q3Vals.filter(v=>v=="1").length;
-    if (correct==2) q3Score=2;
-    else if (correct==1) q3Score=1;
-  } else q3Score=0;
-  results.push(["Виберіть методи для роботи з масивами", q3.map(e=>e.nextSibling.textContent.trim()).join(", "), q3Score]);
+    q3Score = correct==2 ? 2 : correct==1 ? 1 : 0;
+  }
+  results.push(["Виберіть методи для роботи з масивами", q3.map(e=>e.nextSibling.textContent.trim()).join(", ")||"-", q3Score]);
   total += q3Score;
+
 
   const q4 = Array.from(form.q4).filter(el=>el.checked);
   const q4Vals = q4.map(e=>e.value);
   let q4Score = 0;
   if (q4.length==2) {
     let correct = q4Vals.filter(v=>v=="1").length;
-    if (correct==2) q4Score=2;
-    else if (correct==1) q4Score=1;
-  } else q4Score=0;
-  results.push(["Виберіть властивості об’єкта document", q4.map(e=>e.nextSibling.textContent.trim()).join(", "), q4Score]);
+    q4Score = correct==2 ? 2 : correct==1 ? 1 : 0;
+  }
+  results.push(["Виберіть властивості об’єкта document", q4.map(e=>e.nextSibling.textContent.trim()).join(", ")||"-", q4Score]);
   total += q4Score;
 
-  const q5 = form.q5.value;
-  results.push(["Виберіть правильний синтаксис виведення у консоль", q5==1?"console.log('Hi')":"-", q5==1?1:0]);
-  total += q5==1?1:0;
+
+  const q5 = form.q5.value || "";
+  const q5Score = q5=="1"?1:0;
+  results.push(["Виберіть правильний синтаксис виведення у консоль", q5=="1"?"console.log('Hi')":"-", q5Score]);
+  total += q5Score;
+
 
   const q6 = Array.from(form.q6.options).filter(o=>o.selected);
   const q6Vals = q6.map(o=>o.value);
   let q6Score = 0;
   if (q6.length==2) {
     let correct = q6Vals.filter(v=>v=="1").length;
-    if (correct==2) q6Score=2;
-    else if (correct==1) q6Score=1;
-  } else q6Score=0;
-  results.push(["Виберіть цикли, що існують у JavaScript", q6.map(o=>o.text).join(", "), q6Score]);
+    q6Score = correct==2 ? 2 : correct==1 ? 1 : 0;
+  }
+  results.push(["Виберіть цикли, що існують у JavaScript", q6.map(o=>o.text).join(", ")||"-", q6Score]);
   total += q6Score;
+
 
   const q7 = form.q7.value.trim().toLowerCase();
   const q7Score = q7=="boolean"?1:0;
-  results.push(["Тип даних true/false", q7, q7Score]);
+  results.push(["Тип даних true/false", q7 || "-", q7Score]);
   total += q7Score;
+
 
   let table = "<table><tr><th>Питання</th><th>Відповідь</th><th>Бали</th></tr>";
   results.forEach(r=>{
