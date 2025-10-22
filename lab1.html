@@ -80,8 +80,8 @@ function fun7_1() {
   if (index !== -1) {
     document.form7.output_quantity.value = quantity[index];
     document.form7.output_cost.value = cost[index] + " грн";
+    console.log(name);
   }
-  console.log(name);
 }
 
 function fun7_2() {
@@ -92,6 +92,7 @@ function fun7_2() {
   let total = quantity[index] * cost[index];
   document.getElementById("result7").innerHTML =
     "Загальна сума товару \"" + product[index] + "\" = " + total.toFixed(2) + " грн";
+  console.log(name);
 }
 </script>
 
@@ -211,4 +212,5 @@ document.write("Привіт! Мене звати Святослав, студе
 
 </body>
 </html>
+
 
