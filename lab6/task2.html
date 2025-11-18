@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Lab 6 – Regular Expressions</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+input {
+    width: 350px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #aaa;
+    border-radius: 6px;
+}
+
+input.valid {
+    border-color: green;
+    color: green;
+}
+
+input.invalid {
+    border-color: red;
+    color: red;
+}
+
+.msg {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 12px;
+    left: 370px;
+}
+
+.check {
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 4px;
+    left: 370px;
+}
+</style>
+</head>
+<body>
+
+<h2>Лабораторна робота 6 — перевірка форми</h2>
+
+<div class="input-group">
+    <label>Email:</label><br>
+    <input type="text" id="email">
+    <span class="msg" id="email-msg"></span>
+</div>
+
+<div class="input-group">
+    <label>Ім’я та прізвище:</label><br>
+    <input type="text" id="fio">
+    <span class="msg" id="fio-msg"></span>
+</div>
+
+<div class="input-group">
+    <label>Логін:</label><br>
+    <input type="text" id="login">
+    <span class="msg" id="login-msg"></span>
+</div>
+
+<div class="input-group">
+    <label>Пароль:</label><br>
+    <input type="password" id="pass">
+    <span class="msg" id="pass-msg"></span>
+</div>
+
+<div class="input-group">
+    <label>Поштовий індекс:</label><br>
+    <input type="text" id="index">
+    <span class="msg" id="index-msg"></span>
+</div>
+
+<button onclick="validateForm()">Перевірити</button>
+
+
+<script>
+function setValid(element, msgElement) {
+    element.classList.add("valid");
+    element.classList.remove("invalid");
+    msgElement.innerHTML = "<span class='check'>✔</span>";
+}
+
+function setInvalid(element, msgElement, text) {
+    element.classList.add("invalid");
+    element.classList.remove("valid");
+    msgElement.textContent = text;
+}
+
+function validateForm() {
+
+    // ---------------- EMAIL ----------------
+    let email = document.getElementById("email");
+    let emailMsg = document.getElementById("email-msg");
+
+    let emailRegex = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+
+    if (emailRegex.test(email.value)) {
+        setValid(email, emailMsg);
+    } else {
+        setInvalid(email, emailMsg, "Email має закінчуватися на @pnu.edu.ua");
+    }
+
+    // ---------------- FIO ----------------
+    let fio = document.getElementById("fio");
+    let fioMsg = document.getElementById("fio-msg");
+
+    let fioRegex = /^[A-ZА-ЯІЇЄ][a-zа-яіїє]+ [A-ZА-ЯІЇЄ]+$/;
+
+    if (fioRegex.test(fio.value)) {
+        setValid(fio, fioMsg);
+    } else {
+        setInvalid(fio, fioMsg, "Формат: Ім'я (Перша велика), Прізвище (всі великі)");
+    }
+
+    // ---------------- LOGIN ----------------
+    let login = document.getElementById("login");
+    let loginMsg = document.getElementById("login-msg");
+
+    let loginRegex = /^[a-zA-Z]+$/;
+
+    if (loginRegex.test(login.value)) {
+        setValid(login, loginMsg);
+    } else {
+        setInvalid(login, loginMsg, "Тільки латинські літери");
+    }
+
+    // ---------------- PASSWORD ----------------
+    let pass = document.getElementById("pass");
+    let passMsg = document.getElementById("pass-msg");
+
+    let passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+
+    if (passRegex.test(pass.value)) {
+        setValid(pass, passMsg);
+    } else {
+        setInvalid(pass, passMsg, "Мін. 8 символів, 1 буква, 1 цифра, 1 спецсимвол _-!@#$%^&*");
+    }
+
+    // ---------------- INDEX ----------------
+    let index = document.getElementById("index");
+    let indexMsg = document.getElementById("index-msg");
+
+    let indexRegex = /^\d{5}$/;
+
+    if (indexRegex.test(index.value)) {
+        setValid(index, indexMsg);
+    } else {
+        setInvalid(index, indexMsg, "Потрібно 5 цифр");
+    }
+}
+</script>
+
+</body>
+</html>
