@@ -1,0 +1,119 @@
+body.light {
+    background: #f2f2f2;
+    color: #000;
+}
+
+body.dark {
+    background: #1b1b1b;
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    background: #333;
+    padding: 10px;
+    align-items: center;
+    color: white;
+}
+
+.navbar .logo {
+    flex: 1;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+    font-size: 26px;
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #444;
+        padding: 10px;
+    }
+    .burger {
+        display: block;
+    }
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    animation: popup .3s ease;
+}
+@keyframes popup {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close {
+    font-size: 24px;
+    float: right;
+    cursor: pointer;
+}
+
+#tabbed_box_1 {
+    width: 350px;
+    margin: 40px auto;
+}
+
+.tabbed_box h4 {
+    margin-bottom: 10px;
+}
+
+.tabbed_area {
+    background: #636d76;
+    padding: 8px;
+}
+
+ul.tabs {
+    margin: 0;
+    padding: 0;
+}
+
+ul.tabs li {
+    display: inline;
+}
+
+ul.tabs li a {
+    background: #464c54;
+    color: #ffebb5;
+    padding: 8px 14px;
+    text-decoration: none;
+    border: 1px solid #464c54;
+}
+
+ul.tabs li a.active {
+    background: white;
+    color: black;
+    border-bottom: 1px solid white;
+}
+
+.content {
+    background: white;
+    padding: 10px;
+    border: 1px solid #464c54;
+}

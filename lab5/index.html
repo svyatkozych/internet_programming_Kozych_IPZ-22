@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна №5 — Вкладки, Тема, Модальне, Меню</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light">
+
+<nav class="navbar">
+    <div class="logo">MySite</div>
+    <div class="burger" id="burgerBtn">☰</div>
+
+    <ul class="nav-links" id="navMenu">
+        <li><a href="#">Головна</a></li>
+        <li><a href="#">Про нас</a></li>
+        <li><a href="#">Контакти</a></li>
+    </ul>
+</nav>
+
+<button id="themeBtn">Змінити тему</button>
+
+<button id="openModal">Показати повідомлення</button>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h3>Це модальне вікно</h3>
+        <p>Натисніть поза вікном або хрестик, щоб закрити.</p>
+    </div>
+</div>
+
+<div id="tabbed_box_1" class="tabbed_box">
+    <h4>Browse Site <small>Select a Tab</small></h4>
+
+    <div class="tabbed_area">
+        <ul class="tabs">
+            <li><a href="javascript:tabSwitch('tab_1', 'content_1');" id="tab_1" class="active">Topics</a></li>
+            <li><a href="javascript:tabSwitch('tab_2', 'content_2');" id="tab_2">Archives</a></li>
+            <li><a href="javascript:tabSwitch('tab_3', 'content_3');" id="tab_3">Pages</a></li>
+        </ul>
+
+        <div id="content_1" class="content">
+            <ul>
+                <li><a href="">HTML Techniques <small>4 Posts</small></a></li>
+                <li><a href="">CSS Styling <small>32 Posts</small></a></li>
+                <li><a href="">Flash Tutorials <small>2 Posts</small></a></li>
+            </ul>
+        </div>
+
+        <div id="content_2" class="content" style="display:none;">
+            <ul>
+                <li><a href="">December 2008 <small>6 Posts</small></a></li>
+                <li><a href="">November 2008 <small>4 Posts</small></a></li>
+            </ul>
+        </div>
+
+        <div id="content_3" class="content" style="display:none;">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Головна сторінка</title>
+</head>
+<body>
+  <p>ПІБ: Козич Святослав Ігорович</p>
+  <p>Варіант №20</p>
+  <a href="lab1.html">Лабораторна робота 1</a>
+  <a href="lab2.html">Лабораторна робота 2</a>
+  <a href="lab3.html">Лабораторна робота 3</a>
+  <a href="lab4.html">Лабораторна робота 4</a>
+</body>
+</html>
+>>>>>>> ee01d167b9ea9aeec99213ca84715ef11d92bcd5
