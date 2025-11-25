@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна робота 7 — Робота з рядками</title>
+<style>
+    body { font-family: Arial; padding: 20px; line-height: 1.5; }
+    button { margin-top: 10px; padding: 5px 15px; cursor: pointer; }
+    .task { border: 1px solid #aaa; padding: 15px; margin: 15px 0; border-radius: 5px; }
+    .result { color: green; font-weight: bold; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Лабораторна робота 7 — Робота з рядками (JS)</h1>
+<div class="task">
+    <h3>Завдання 1 — Довжина рядка</h3>
+    <input id="t1" type="text" placeholder="Введіть рядок">
+    <button onclick="task1()">OK</button>
+    <div id="r1" class="result"></div>
+</div>
+<div class="task">
+    <h3>Завдання 2 — Верхній / нижній регістр</h3>
+    <input id="t2" type="text" placeholder="Введіть рядок">
+    <button onclick="task2()">OK</button>
+    <div id="r2" class="result"></div>
+</div>
+<div class="task">
+    <h3>Завдання 3 — Пошук індексу символу</h3>
+    <input id="t3" type="text" placeholder="Рядок">
+    <input id="t3c" type="text" placeholder="Символ">
+    <button onclick="task3()">OK</button>
+    <div id="r3" class="result"></div>
+</div>
+<div class="task">
+    <h3>Завдання 4 — Кількість входжень символу</h3>
+    <input id="t4" type="text" placeholder="Рядок">
+    <input id="t4c" type="text" placeholder="Символ">
+    <button onclick="task4()">OK</button>
+    <div id="r4" class="result"></div>
+</div>
+<div class="task">
+    <h3>Завдання 5 — Міняємо місцями кожні 2 символи</h3>
+    <input id="t5" type="text" placeholder="Рядок">
+    <button onclick="task5()">OK</button>
+    <div id="r5" class="result"></div>
+</div>
+<div class="task">
+    <h3>Завдання 6 — Перевірка спаму</h3>
+    <input id="t6" type="text" placeholder="Рядок">
+    <button onclick="task6()">OK</button>
+    <div id="r6" class="result"></div>
+</div>
+
+<div class="task">
+    <h3>Завдання 7 — Скорочення рядка</h3>
+    <input id="t7" type="text" placeholder="Рядок">
+    <input id="t7n" type="number" placeholder="Макс. довжина">
+    <button onclick="task7()">OK</button>
+    <div id="r7" class="result"></div>
+</div>
+
+<div class="task">
+    <h2>Завдання 8 — Маніпуляції з рядками</h2>
+
+    <h3>1) Зворотній порядок слів</h3>
+    <input id="t8a" type="text">
+    <button onclick="task8a()">OK</button>
+    <div id="r8a" class="result"></div>
+
+    <h3>2) Сортування слів за довжиною</h3>
+    <input id="t8b" type="text">
+    <button onclick="task8b()">OK</button>
+    <div id="r8b" class="result"></div>
+
+    <h3>3) Видалення голосних</h3>
+    <input id="t8c" type="text">
+    <button onclick="task8c()">OK</button>
+    <div id="r8c" class="result"></div>
+
+    <h3>4) Перевірка анаграми</h3>
+    <input id="t8d1" type="text" placeholder="Слово 1">
+    <input id="t8d2" type="text" placeholder="Слово 2">
+    <button onclick="task8d()">OK</button>
+    <div id="r8d" class="result"></div>
+
+    <h3>5) Заміна повторюваних символів на "?"</h3>
+    <input id="t8e" type="text">
+    <button onclick="task8e()">OK</button>
+    <div id="r8e" class="result"></div>
+
+    <h3>6) Перевірка паліндрому</h3>
+    <input id="t8f" type="text">
+    <button onclick="task8f()">OK</button>
+    <div id="r8f" class="result"></div>
+
+    <h3>7) Видалення цифр</h3>
+    <input id="t8g" type="text">
+    <button onclick="task8g()">OK</button>
+    <div id="r8g" class="result"></div>
+
+    <h3>8) Видалення пробілів всередині</h3>
+    <input id="t8h" type="text">
+    <button onclick="task8h()">OK</button>
+    <div id="r8h" class="result"></div>
+
+    <h3>9) Кількість голосних</h3>
+    <input id="t8i" type="text">
+    <button onclick="task8i()">OK</button>
+    <div id="r8i" class="result"></div>
+
+    <h3>10) Символи з парними індексами</h3>
+    <input id="t8j" type="text">
+    <button onclick="task8j()">OK</button>
+    <div id="r8j" class="result"></div>
+</div>
+
+<script>
+function task1() {
+    let s = document.getElementById("t1").value;
+    document.getElementById("r1").innerHTML = s.length;
+}
+function task2() {
+    let s = document.getElementById("t2").value;
+    document.getElementById("r2").innerHTML =
+        "Верхній: " + s.toUpperCase() + "<br>Нижній: " + s.toLowerCase();
+}
+function task3() {
+    let s = document.getElementById("t3").value;
+    let c = document.getElementById("t3c").value;
+    document.getElementById("r3").innerHTML = s.indexOf(c);
+}
+function task4() {
+    let s = document.getElementById("t4").value;
+    let c = document.getElementById("t4c").value;
+    let count = [...s].filter(ch => ch === c).length;
+    document.getElementById("r4").innerHTML = count;
+}
+function task5() {
+    let s = document.getElementById("t5").value;
+    let res = "";
+    for (let i = 0; i < s.length; i += 2) {
+        let a = s[i];
+        let b = s[i + 1] || "";
+        res += b + a;
+    }
+    document.getElementById("r5").innerHTML = res;
+}
+function task6() {
+    let s = document.getElementById("t6").value.toLowerCase();
+    let spam = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+    let found = spam.some(word => s.includes(word));
+    document.getElementById("r6").innerHTML = found;
+}
+function task7() {
+    let s = document.getElementById("t7").value;
+    let n = Number(document.getElementById("t7n").value);
+
+    if (s.length <= n) {
+        document.getElementById("r7").innerHTML = s;
+        return;
+    }
+
+    let cut = n - 3;
+    document.getElementById("r7").innerHTML = s.slice(0, cut) + "...";
+}
+function task8a() {
+    let s = document.getElementById("t8a").value;
+    document.getElementById("r8a").innerHTML = s.split(" ").reverse().join(" ");
+}
+function task8b() {
+    let s = document.getElementById("t8b").value;
+    let words = s.split(" ");
+    words.sort((a, b) => a.length - b.length || a.localeCompare(b));
+    document.getElementById("r8b").innerHTML = words.join(" ");
+}
+function task8c() {
+    let s = document.getElementById("t8c").value;
+    let res = s.replace(/[aeiouаеєиіїоуюя]/gi, "");
+    document.getElementById("r8c").innerHTML = res;
+}
+function task8d() {
+    let a = document.getElementById("t8d1").value.toLowerCase();
+    let b = document.getElementById("t8d2").value.toLowerCase();
+
+    let sort = s => [...s].sort().join("");
+    document.getElementById("r8d").innerHTML = (sort(a) === sort(b));
+}
+function task8e() {
+    let s = document.getElementById("t8e").value;
+    let count = {};
+    for (let ch of s) count[ch] = (count[ch] || 0) + 1;
+
+    let res = [...s].map(ch => count[ch] >= 2 ? "?" : ch).join("");
+    document.getElementById("r8e").innerHTML = res;
+}
+function task8f() {
+    let s = document.getElementById("t8f").value.toLowerCase().replace(/ /g, "");
+    let rev = [...s].reverse().join("");
+    document.getElementById("r8f").innerHTML = (s === rev);
+}
+function task8g() {
+    let s = document.getElementById("t8g").value;
+    document.getElementById("r8g").innerHTML = s.replace(/[0-9]/g, "");
+}
+function task8h() {
+    let s = document.getElementById("t8h").value;
+    let leading = s.match(/^\s*/)[0];
+    let trailing = s.match(/\s*$/)[0];
+
+    let middle = s.trim().replace(/ /g, "");
+    document.getElementById("r8h").innerHTML = leading + middle + trailing;
+}
+function task8i() {
+    let s = document.getElementById("t8i").value.toLowerCase();
+    let matches = s.match(/[aeiouаеєиіїоуюя]/g);
+    document.getElementById("r8i").innerHTML = matches ? matches.length : 0;
+}
+function task8j() {
+    let s = document.getElementById("t8j").value;
+    let res = [...s].filter((ch, i) => i % 2 === 0).join("");
+    document.getElementById("r8j").innerHTML = res;
+}
+</script>
+
+</body>
+</html>
