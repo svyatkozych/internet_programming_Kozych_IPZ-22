@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота: Об'єкти та класи в JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .task {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            padding: 8px 12px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button.clear {
+            background-color: #f44336;
+        }
+        button.clear:hover {
+            background-color: #d32f2f;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9f7e9;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+        .transport-demo {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Лабораторна робота: Об'єкти та класи в JavaScript</h1>
+        
+        <div class="task">
+            <h2>Завдання 1: Робота з часом</h2>
+            
+            <div class="input-group">
+                <label for="hours">Години:</label>
+                <input type="number" id="hours" min="0" max="23" value="20">
+            </div>
+            
+            <div class="input-group">
+                <label for="minutes">Хвилини:</label>
+                <input type="number" id="minutes" min="0" max="59" value="30">
+            </div>
+            
+            <div class="input-group">
+                <label for="seconds">Секунди:</label>
+                <input type="number" id="seconds" min="0" max="59" value="45">
+            </div>
+            
+            <button onclick="displayTime()">1.1. Вивести поточний час</button>
+            
+            <div class="input-group">
+                <label for="addSeconds">Додати секунд:</label>
+                <input type="number" id="addSeconds" min="0" value="30">
+            </div>
+            
+            <button onclick="addSeconds()">1.2. Додати секунди</button>
+            <button class="clear" onclick="clearTask1()">Очистити</button>
+            
+            <div id="task1-result" class="result"></div>
+        </div>
+        
+        <div class="task">
+            <h2>Завдання 2: Робота з датами</h2>
+            
+            <button onclick="displayCurrentDateTime()">2.1. Виконати: Виведення поточної дати, дня тижня і часу</button>
+            
+            <div class="input-group">
+                <label for="year">Рік:</label>
+                <input type="number" id="year" min="1900" max="2100" value="2025">
+            </div>
+            
+            <div class="input-group">
+                <label for="month">Місяць (1-12):</label>
+                <input type="number" id="month" min="1" max="12" value="10">
+            </div>
+            
+            <button onclick="getLastDayOfMonth()">2.2. Останній день місяця</button>
+            
+            <button onclick="getSecondsInfo()">2.3. Секунди від початку дня та до наступного дня</button>
+            <button class="clear" onclick="clearTask2()">Очистити</button>
+            
+            <div id="task2-result" class="result"></div>
+        </div>
+        <div class="task">
+            <h2>Завдання 3: Клас Car</h2>
+            
+            <div class="input-group">
+                <label for="carBrand">Марка автомобіля:</label>
+                <input type="text" id="carBrand" value="Toyota">
+            </div>
+            
+            <div class="input-group">
+                <label for="carModel">Модель автомобіля:</label>
+                <input type="text" id="carModel" value="Camry">
+            </div>
+            
+            <div class="input-group">
+                <label for="carYear">Рік випуску:</label>
+                <input type="number" id="carYear" min="1900" max="2030" value="2020">
+            </div>
+            
+            <button onclick="createCar()">Створити автомобіль</button>
+            <button class="clear" onclick="clearTask3()">Очистити</button>
+            
+            <div id="task3-result" class="result"></div>
+        </div>
+        
+        <div class="task">
+            <h2>Завдання 4: Клас ElectricCar</h2>
+            
+            <div class="input-group">
+                <label for="electricCarBrand">Марка електромобіля:</label>
+                <input type="text" id="electricCarBrand" value="Tesla">
+            </div>
+            
+            <div class="input-group">
+                <label for="electricCarModel">Модель електромобіля:</label>
+                <input type="text" id="electricCarModel" value="Model 3">
+            </div>
+            
+            <div class="input-group">
+                <label for="electricCarYear">Рік випуску:</label>
+                <input type="number" id="electricCarYear" min="1900" max="2030" value="2022">
+            </div>
+            
+            <div class="input-group">
+                <label for="battery">Ємність батареї (кВт·год):</label>
+                <input type="number" id="battery" min="0" value="75">
+            </div>
+            
+            <button onclick="createElectricCar()">Створити електромобіль</button>
+            <button class="clear" onclick="clearTask4()">Очистити</button>
+            
+            <div id="task4-result" class="result"></div>
+        </div>
+        
+        <div class="task">
+            <h2>Завдання 5: Статичний метод</h2>
+            
+            <div class="input-group">
+                <label for="num1">Перше число:</label>
+                <input type="number" id="num1" value="5">
+            </div>
+            
+            <div class="input-group">
+                <label for="num2">Друге число:</label>
+                <input type="number" id="num2" value="7">
+            </div>
+            
+            <button onclick="useStaticMethod()">Використати статичний метод додавання</button>
+            <button class="clear" onclick="clearTask5()">Очистити</button>
+            
+            <div id="task5-result" class="result"></div>
+        </div>
+        
+        <div class="task">
+            <h2>Завдання 6: Поліморфізм транспортних засобів (Варіант 10)</h2>
+            
+            <div class="input-group">
+                <label for="transportSpeed">Швидкість транспорту (км/год):</label>
+                <input type="number" id="transportSpeed" min="0" value="50">
+            </div>
+            
+            <div class="input-group">
+                <label for="carSpeed">Швидкість автомобіля (км/год):</label>
+                <input type="number" id="carSpeed" min="0" value="90">
+            </div>
+            
+            <div class="input-group">
+                <label for="bicycleSpeed">Швидкість велосипеда (км/год):</label>
+                <input type="number" id="bicycleSpeed" min="0" value="25">
+            </div>
+            
+            <button onclick="demonstratePolymorphism()">Показати інформацію</button>
+            <button class="clear" onclick="clearTask6()">Очистити поля</button>
+            
+            <div id="task6-result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let time = {
+            hours: 20,
+            minutes: 30,
+            seconds: 45
+        };
+
+        function displayTime() {
+            const resultDiv = document.getElementById('task1-result');
+            resultDiv.innerHTML = `Поточний час: ${formatTime(time)}`;
+        }
+
+        function addSeconds() {
+            const addSeconds = parseInt(document.getElementById('addSeconds').value);
+            
+        
+            time.hours = parseInt(document.getElementById('hours').value);
+            time.minutes = parseInt(document.getElementById('minutes').value);
+            time.seconds = parseInt(document.getElementById('seconds').value);
+ 
+            let totalSeconds = time.hours * 3600 + time.minutes * 60 + time.seconds + addSeconds;
+            
+            time.hours = Math.floor(totalSeconds / 3600) % 24;
+            time.minutes = Math.floor((totalSeconds % 3600) / 60);
+            time.seconds = totalSeconds % 60;
+            document.getElementById('hours').value = time.hours;
+            document.getElementById('minutes').value = time.minutes;
+            document.getElementById('seconds').value = time.seconds;
+            
+            const resultDiv = document.getElementById('task1-result');
+            resultDiv.innerHTML = `Час після додавання ${addSeconds} секунд: ${formatTime(time)}`;
+        }
+
+        function formatTime(timeObj) {
+            return `${String(timeObj.hours).padStart(2, '0')}:${String(timeObj.minutes).padStart(2, '0')}:${String(timeObj.seconds).padStart(2, '0')}`;
+        }
+
+        function clearTask1() {
+            document.getElementById('hours').value = '20';
+            document.getElementById('minutes').value = '30';
+            document.getElementById('seconds').value = '45';
+            document.getElementById('addSeconds').value = '30';
+            document.getElementById('task1-result').innerHTML = '';
+            time = { hours: 20, minutes: 30, seconds: 45 };
+        }
+        function displayCurrentDateTime() {
+            const now = new Date();
+            const months = [
+                'січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
+                'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'
+            ];
+            const daysOfWeek = [
+                'неділя', 'понеділок', 'вівторок', 'середа', 
+                'четвер', 'п\'ятниця', 'субота'
+            ];
+            
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            const dayOfWeek = daysOfWeek[now.getDay()];
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            const resultDiv = document.getElementById('task2-result');
+            resultDiv.innerHTML = `
+                <strong>Дата:</strong> ${date} ${month} ${year} року<br>
+                <strong>День тижня:</strong> ${dayOfWeek}<br>
+                <strong>Час:</strong> ${hours}:${minutes}
+            `;
+        }
+
+        function getLastDayOfMonth() {
+            const year = parseInt(document.getElementById('year').value);
+            const month = parseInt(document.getElementById('month').value);
+            
+            const nextMonth = new Date(year, month, 1);
+            const lastDay = new Date(nextMonth - 1);
+            
+            const resultDiv = document.getElementById('task2-result');
+            resultDiv.innerHTML = `Останній день місяця: ${lastDay.getDate()}`;
+        }
+
+        function getSecondsInfo() {
+            const now = new Date();
+            
+            const secondsFromStart = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+            
+            const secondsToNextDay = 24 * 3600 - secondsFromStart;
+            
+            const resultDiv = document.getElementById('task2-result');
+            resultDiv.innerHTML = `
+                <strong>Секунд з початку дня:</strong> ${secondsFromStart}<br>
+                <strong>Секунд до початку наступного дня:</strong> ${secondsToNextDay}
+            `;
+        }
+
+        function clearTask2() {
+            document.getElementById('year').value = '2025';
+            document.getElementById('month').value = '10';
+            document.getElementById('task2-result').innerHTML = '';
+        }
+
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+
+            info() {
+                return `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+            }
+        }
+
+        function createCar() {
+            const brand = document.getElementById('carBrand').value;
+            const model = document.getElementById('carModel').value;
+            const year = parseInt(document.getElementById('carYear').value);
+            
+            const car = new Car(brand, model, year);
+            const resultDiv = document.getElementById('task3-result');
+            resultDiv.innerHTML = car.info();
+        }
+
+        function clearTask3() {
+            document.getElementById('carBrand').value = 'Toyota';
+            document.getElementById('carModel').value = 'Camry';
+            document.getElementById('carYear').value = '2020';
+            document.getElementById('task3-result').innerHTML = '';
+        }
+
+        class ElectricCar extends Car {
+            constructor(brand, model, year, battery) {
+                super(brand, model, year);
+                this.battery = battery;
+            }
+
+            charge() {
+                return `${this.brand} ${this.model} заряджається... Батарея: ${this.battery} кВт·год`;
+            }
+            
+            info() {
+                return `${super.info()} Батарея: ${this.battery} кВт·год`;
+            }
+        }
+
+        function createElectricCar() {
+            const brand = document.getElementById('electricCarBrand').value;
+            const model = document.getElementById('electricCarModel').value;
+            const year = parseInt(document.getElementById('electricCarYear').value);
+            const battery = parseInt(document.getElementById('battery').value);
+            
+            const electricCar = new ElectricCar(brand, model, year, battery);
+            const resultDiv = document.getElementById('task4-result');
+            resultDiv.innerHTML = `
+                ${electricCar.info()}<br>
+                ${electricCar.charge()}
+            `;
+        }
+
+        function clearTask4() {
+            document.getElementById('electricCarBrand').value = 'Tesla';
+            document.getElementById('electricCarModel').value = 'Model 3';
+            document.getElementById('electricCarYear').value = '2022';
+            document.getElementById('battery').value = '75';
+            document.getElementById('task4-result').innerHTML = '';
+        }
+
+        class MathHelper {
+            static add(a, b) {
+                return a + b;
+            }
+        }
+
+        function useStaticMethod() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            
+            const result = MathHelper.add(num1, num2);
+            const resultDiv = document.getElementById('task5-result');
+            resultDiv.innerHTML = `${num1} + ${num2} = ${result}`;
+        }
+
+        function clearTask5() {
+            document.getElementById('num1').value = '5';
+            document.getElementById('num2').value = '7';
+            document.getElementById('task5-result').innerHTML = '';
+        }
+
+    
+        class Transport {
+            constructor(speed) {
+                this.speed = speed;
+            }
+
+            move() {
+                return `Транспорт рухається зі швидкістю ${this.speed} км/год.`;
+            }
+            
+       
+            static isSpeedValid(speed) {
+                return speed >= 0 && speed <= 500;
+            }
+        }
+
+        class Car6 extends Transport {
+            constructor(speed) {
+                super(speed);
+            }
+
+            move() {
+                return `Автомобіль рухається зі швидкістю ${this.speed} км/год.`;
+            }
+        }
+
+        class Bicycle extends Transport {
+            constructor(speed) {
+                super(speed);
+            }
+
+            move() {
+                return `Велосипед рухається зі швидкістю ${this.speed} км/год.`;
+            }
+        }
+
+        function demonstratePolymorphism() {
+            const transportSpeed = parseInt(document.getElementById('transportSpeed').value);
+            const carSpeed = parseInt(document.getElementById('carSpeed').value);
+            const bicycleSpeed = parseInt(document.getElementById('bicycleSpeed').value);
+            
+       
+            if (!Transport.isSpeedValid(transportSpeed) || 
+                !Transport.isSpeedValid(carSpeed) || 
+                !Transport.isSpeedValid(bicycleSpeed)) {
+                document.getElementById('task6-result').innerHTML = 
+                    'Помилка: Швидкість повинна бути в діапазоні від 0 до 500 км/год.';
+                return;
+            }
+            
+            const transport = new Transport(transportSpeed);
+            const car = new Car6(carSpeed);
+            const bicycle = new Bicycle(bicycleSpeed);
+            
+            const transports = [transport, car, bicycle];
+            
+            let resultHTML = '<div class="transport-demo">';
+            transports.forEach(t => {
+                resultHTML += `<p>${t.move()}</p>`;
+            });
+            resultHTML += '</div>';
+            
+            document.getElementById('task6-result').innerHTML = resultHTML;
+        }
+
+        function clearTask6() {
+            document.getElementById('transportSpeed').value = '50';
+            document.getElementById('carSpeed').value = '90';
+            document.getElementById('bicycleSpeed').value = '25';
+            document.getElementById('task6-result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
