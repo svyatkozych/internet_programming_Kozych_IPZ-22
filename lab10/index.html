@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 10 - jQuery</title>
+
+    [cite_start]<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script> [cite: 14]
+
+    <style>
+        .highlight {
+            background-color: #f0f8ff; /* AliceBlue */
+            border: 1px solid #00bfff; /* DeepSkyBlue */
+            padding: 5px;
+            transition: all 0.3s;
+        }
+
+        .clicked-style {
+            border: 2px solid red;
+            background-color: yellow;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            // Перевірка, що jQuery працює (як у Завданні 1)
+            [cite_start]// alert("Бібліотека jQuery готова до роботи!"); [cite: 16]
+
+            var $text = $('#hide_text'); [cite_start]// присвоюємо змінній $text блок з id = hide_text [cite: 27]
+            $text.hide(); [cite_start]// приховуємо отриманий блок [cite: 27]
+
+            [cite_start]$('.button').click(function(e) { // при кліці на HTML елемент з класом button [cite: 27]
+                e.preventDefault(); // Запобігаємо переходу за посиланням #
+                $text.show(200); [cite_start]// показуємо прихований блок із затримкою 200 мілісекунд [cite: 27]
+            });
+
+            [cite_start]$("p:first").text("DOM first!"); [cite: 40]
+            [cite_start]jQuery("p:last").text("DOM last!"); [cite: 41]
+
+            $('#hide_text').hover(
+                function() {
+                    [cite_start]$(this).addClass('highlight'); // Додає клас при наведенні [cite: 42]
+                },
+                function() {
+                    $(this).removeClass('highlight'); [cite_start]// Видаляє клас, коли курсор іде [cite: 42]
+                }
+            );
+
+            [cite_start]$('#hide_text').bind('click', function() { // Одинарний клік [cite: 45]
+                $(this).addClass('clicked-style');
+            });
+
+            [cite_start]$('#hide_text').bind('dblclick', function() { // Подвійний клік [cite: 45]
+                $(this).removeClass('clicked-style');
+            });
+
+            [cite_start]$('#btn-single').bind('click', function() { [cite: 47]
+                alert('Одинарний клік');
+            });
+
+            [cite_start]$('#btn-double').bind('dblclick', function() { [cite: 47]
+                alert('Подвійний клік');
+            });
+
+            $('#toggle-img').click(function(e) {
+                e.preventDefault();
+                [cite_start]$('#my-image').show(); // Показати зображення при кліку на посилання [cite: 48]
+            });
+
+            $('#my-image').click(function() {
+                [cite_start]$(this).hide(); // Приховати зображення при кліку на нього [cite: 49]
+            });
+
+            [cite_start]$('#my-image').mouseover(function() { // При наведенні миші [cite: 49]
+                var caption = $(this).attr('alt');
+                $(this).attr('title', caption); // Використовуємо title для спливаючого вікна
+            });
+            
+            [cite_start]$("form").submit(function() { [cite: 52]
+                [cite_start]if ($("input:first").val() == "correct") { [cite: 53]
+                    $("span").text("Успішно!").show(); // Повідомлення про успіх (Змінено з "Перевіряєм..." на "Успішно!" для відповідності умові)
+                    return true; // Дозволяє відправку (спрацює alert з action="javascript:alert('Успішно!');")
+                }
+                
+                [cite_start]$("span").text("Неправильно!").show().fadeOut(1000); [cite: 57]
+                return false; [cite_start]// Відміняє відправку форми [cite: 58]
+            });
+        });
+    </script>
+</head>
+
+<body>
+    [cite_start]<h1>Контент сторінки</h1> [cite: 27]
+    <p>Цей абзац буде змінений на 'DOM first!'</p>
+    
+    [cite_start]<a href="#" class="button">Натисніть, щоб показати текст (Завдання 1)</a> [cite: 27]
+    [cite_start]<div id="hide_text">Демонстраційний прихований текст (Завдання 1, 2, 3)</div> [cite: 27]
+    
+    <hr>
+
+    <h2>Завдання 3: Обробка подій</h2>
+    
+    <button id="btn-single">Одинарний клік (Завдання 3)</button>
+    <button id="btn-double">Подвійний клік (Завдання 3)</button>
+    
+    <hr>
+    
+    [cite_start]<p><a href="#" id="toggle-img">Показати зображення (Завдання 3)</a></p> [cite: 48]
+    [cite_start]<img id="my-image" src="image.jpg" alt="Підпис до зображення" style="display: none; width: 100px; height: auto;"> [cite: 49]
+
+    <hr>
+
+    <h2>Завдання 3: Валідація форми</h2>
+    
+    [cite_start]<p> Введіть в текстове поле слово 'correct'.</p> [cite: 60]
+    [cite_start]<form action="javascript:alert('Успішно!');"> [cite: 61]
+        [cite_start]<div> [cite: 62]
+            [cite_start]<input type="text" /> [cite: 63]
+            [cite_start]<input type="submit" value="Перевірити"/> [cite: 64]
+        </div>
+    </form>
+    [cite_start]<span></span> [cite: 67]
+    
+    <hr>
+
+    <p>Цей абзац буде змінений на 'DOM last!'</p>
+
+</body>
+</html>
