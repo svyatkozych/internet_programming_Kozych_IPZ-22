@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна робота 11 — jQuery</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    body { font-family: Arial; padding: 20px; }
+    button { margin: 5px; padding: 10px; }
+    #box, #wrap, #wrap2 {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #444;
+    }
+    ul { margin-top: 10px; }
+    li { padding: 3px; }
+</style>
+</head>
+<body>
+
+<h2>Завдання 1</h2>
+<div id="box">Початковий текст</div>
+<input id="inp" value="Стартове значення">
+
+<br><br>
+<button id="t1_html">.html()</button>
+<button id="t1_css">.css()</button>
+<button id="t1_val">.val()</button>
+<button id="t1_attr1">attr(name)</button>
+<button id="t1_attr2">attr(name,value)</button>
+<button id="t1_attr3">attr({...})</button>
+<button id="t1_attr4">attr(function)</button>
+<button id="t1_removeAttr">removeAttr()</button>
+
+<hr>
+
+<h2>Завдання 2</h2>
+
+<div id="wrap">Текст для wrapInner</div>
+
+<ul id="list">
+    <li>A</li><li>B</li><li>C</li><li>C</li>
+</ul>
+
+<button id="t2_type">$.type()</button>
+<button id="t2_unique">$.uniqueSort()</button>
+<button id="t2_contains">$.contains()</button>
+<button id="t2_data">$.data()</button>
+<button id="t2_wrapInner">wrapInner()</button>
+<button id="t2_clone">clone()</button>
+<button id="t2_innerHeight">innerHeight()</button>
+<button id="t2_outerHeight">outerHeight()</button>
+
+<hr>
+
+<h2>Завдання 3</h2>
+
+<button id="b1">first()</button>
+<button id="b2">offsetParent()</button>
+<button id="b3">find()</button>
+<button id="b4">slice()</button>
+<button id="b5">not()</button>
+
+<ul id="items">
+    <li class="a">1</li>
+    <li class="b">2</li>
+    <li class="a">3</li>
+    <li class="b">4</li>
+</ul>
+
+<hr>
+
+<h2>Завдання 4</h2>
+
+<button id="btnA">Ввімкнути стилі для .item</button>
+<button id="btnB">Кожен третій li</button>
+
+<ul id="list2">
+    <li class="item">A</li>
+    <li>B</li>
+    <li>C</li>
+    <li class="item">D</li>
+    <li>E</li>
+    <li>F</li>
+</ul>
+
+<hr>
+
+<script>
+// -----------------------
+// ЗАВДАННЯ 1
+// -----------------------
+
+$("#t1_html").click(function(){
+    $("#box").html("<b>Новий HTML</b>");
+});
+
+$("#t1_css").click(function(){
+    $("#box").css("color","blue");
+});
+
+$("#t1_val").click(function(){
+    alert("Попереднє значення: " + $("#inp").val());
+    $("#inp").val("Змінене значення");
+});
+
+$("#t1_attr1").click(function(){
+    alert("ID елемента: " + $("#box").attr("id"));
+});
+
+$("#t1_attr2").click(function(){
+    $("#box").attr("title", "Привіт, я підказка!");
+});
+
+$("#t1_attr3").click(function(){
+    $("#box").attr({
+        "data-info": "demo",
+        "class": "highlighted"
+    });
+});
+
+$("#t1_attr4").click(function(){
+    $("#box").attr("data-length", function(){
+        return $("#box").text().length;
+    });
+});
+
+$("#t1_removeAttr").click(function(){
+    $("#box").removeAttr("data-info");
+});
+
+// -----------------------
+// ЗАВДАННЯ 2
+// -----------------------
+
+$("#t2_type").click(function(){
+    console.log($.type(123));
+    console.log($.type("text"));
+    console.log($.type({}));
+    console.log($.type([]));
+    console.log($.type(function(){}));
+    alert("Перевір консоль (F12)");
+});
+
+$("#t2_unique").click(function(){
+    let arr = $("#list li").toArray();
+    $.uniqueSort(arr);
+    console.log(arr);
+    alert("Результат у консолі");
+});
+
+$("#t2_contains").click(function(){
+    alert( $.contains(document.body, $("#list")[0]) );
+});
+
+$("#t2_data").click(function(){
+    $("#wrap").data("key","value123");
+    alert( $("#wrap").data("key") );
+});
+
+$("#t2_wrapInner").click(function(){
+    $("#wrap").wrapInner("<div style='color:red'>Вкладений</div>");
+});
+
+$("#t2_clone").click(function(){
+    $("body").append( $("#wrap").clone() );
+});
+
+$("#t2_innerHeight").click(function(){
+    $("#wrap").innerHeight(function(i, old){
+        return old + 20;
+    });
+});
+
+$("#t2_outerHeight").click(function(){
+    alert( $("#wrap").outerHeight() );
+});
+
+// -----------------------
+// ЗАВДАННЯ 3
+// -----------------------
+
+$("#b1").click(function(){
+    $("#items li").first().css("background","yellow");
+});
+
+$("#b2").click(function(){
+    console.log($("#items").offsetParent());
+    alert("Дивись консоль (F12)");
+});
+
+$("#b3").click(function(){
+    $("#items").find(".a").css("color","red");
+});
+
+$("#b4").click(function(){
+    $("#items li").slice(1,3).css("font-weight","bold");
+});
+
+$("#b5").click(function(){
+    $("#items li").not(".a").css("border","1px solid blue");
+});
+
+// -----------------------
+// ЗАВДАННЯ 4
+// -----------------------
+
+$("#btnA").click(function(){
+    $(".item").filter(function(){
+        return true;
+    }).css("background","lightgreen").append(" modify");
+});
+
+$("#btnB").click(function(){
+    $("#list2 li").filter(":nth-child(3n)")
+        .css("background","pink")
+        .append(" modify");
+});
+
+</script>
+
+</body>
+</html>
